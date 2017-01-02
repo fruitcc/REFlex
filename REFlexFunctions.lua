@@ -1405,10 +1405,6 @@ function REFlex_TableTeamArena(IsEnemy, j)
 
 		for jj=1, #REEnemyID do
 			local ClassToken = REFDatabaseA[j][TeamE .. "Team"][REEnemyID[jj]]["classToken"];
-			print("Line:"..Line)
-			print("ClassToken:"..ClassToken)
-			print(RE.ClassIconCoords)
-			print(RE.ClassIconCoords[ClassToken])
 			Line = Line .. "  |TInterface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes:25:25:0:0:256:256:" .. RE.ClassIconCoords[ClassToken][1]*256+5 .. ":" .. RE.ClassIconCoords[ClassToken][2]*256-5 .. ":".. RE.ClassIconCoords[ClassToken][3]*256+5 ..":" .. RE.ClassIconCoords[ClassToken][4]*256-5 .. "|t  ";
 		end
 	else
