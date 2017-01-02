@@ -7,7 +7,7 @@ local L = REFlexLocale;
 function REFlex_SettingsReloadInternal(Field)
 	if REFSettings[Field] then
 		_G["REFlex_GUI_" .. Field]:SetChecked(true);
-	else	
+	else
 		_G["REFlex_GUI_" .. Field]:SetChecked(false);
 	end
 end
@@ -21,10 +21,10 @@ function REFlex_SettingsReload()
 	else
 		REFlex_MinimapButton:Hide();
 	end
-	
+
 	for i=1, #RE.Options do
 		REFlex_SettingsReloadInternal(RE.Options[i]);
-	end	
+	end
 
 	REFlex_GUI_SliderScale:SetValue(REFSettings["MiniBarScale"]);
 	RE.SecondTimeMiniBar = false;
@@ -34,7 +34,7 @@ function REFlex_SettingsReload()
 	end
 	RequestPVPRewards();
 	REFlex_UpdateLDB();
-	
+
 	if RE.NeedReload then
 		ReloadUI();
 	end
@@ -57,17 +57,17 @@ end
 
 function REFlex_GUISave()
 	RE.NeedReload = false;
-	
+
 	for i=1, #RE.Options do
 		REFlex_GUISaveInternal(RE.Options[i]);
 	end
-	
+
 	REFSettings["MiniBarScale"] = REFlex_Round(REFlex_GUI_SliderScale:GetValue(),2);
 
 	REFlex_SettingsReload();
 end
 
-function REFlex_GUI_ModuleChangeBar(ModuleName, NewBar, OldBar) 
+function REFlex_GUI_ModuleChangeBar(ModuleName, NewBar, OldBar)
 	if OldBar == 1 then
 		local FirstLineCount = 0;
 		for j=1, #REFSettings["MiniBarOrder"][RE.ActiveTalentGroup] do
@@ -86,7 +86,7 @@ function REFlex_GUI_ModuleChangeBar(ModuleName, NewBar, OldBar)
 	REFlex_SettingsReload();
 end
 
-function REFlex_GUI_ModuleChangeBarOrder(ModuleName, OldOrder, NewOrder) 
+function REFlex_GUI_ModuleChangeBarOrder(ModuleName, OldOrder, NewOrder)
 	local RETempName = REFSettings["MiniBarOrder"][RE.ActiveTalentGroup][NewOrder]
 	REFSettings["MiniBarOrder"][RE.ActiveTalentGroup][NewOrder] = ModuleName;
 	REFSettings["MiniBarOrder"][RE.ActiveTalentGroup][OldOrder] = RETempName;
@@ -173,7 +173,7 @@ function REFlex_Tab4BarFiller(honorKills)
 	elseif honorKills < 250000 then
 		hkMax = 250000;
 	end
-	
+
 	if hkMax ~= 0 then
 		REFlex_MainTab_Tab4_Bar_Text:SetText(honorKills .. " / " .. hkMax);
 		REFlex_MainTab_Tab4_Bar_I:SetMinMaxValues(0, hkMax);
@@ -220,7 +220,7 @@ function REFlex_DurationShort(TimeRaw, Mode)
 	elseif Mode == "S" then
 		return TimeMin;
 	else
-		return TimeMin .. ":" .. TimeSec;	
+		return TimeMin .. ":" .. TimeSec;
 	end
 end
 
@@ -230,10 +230,10 @@ function REFlex_NumberClean(Number, Round)
 		RoundAlpha = 2;
 		RoundBeta = 0;
 	else
-		RoundAlpha, RoundBeta = Round, Round;	
+		RoundAlpha, RoundBeta = Round, Round;
 	end
 
-	if Number >= 0 then 
+	if Number >= 0 then
 		if Number >= 1000000 then
 			Number = REFlex_Round((Number / 1000000), RoundAlpha) .. "M";
 		elseif Number >= 1000 then
@@ -272,7 +272,7 @@ function REFlex_Find(FieldName, Rated, TalentSets, Map, Season)
 				end
 			elseif Rated == false then
 				for j=1, #REFDatabase do
-					if REFDatabase[j]["IsRated"] == false and REFDatabase[j]["TalentSet"] == TalentSets then 
+					if REFDatabase[j]["IsRated"] == false and REFDatabase[j]["TalentSet"] == TalentSets then
 						REFlex_FindI(FieldName, j);
 					end
 				end
@@ -296,7 +296,7 @@ function REFlex_Find(FieldName, Rated, TalentSets, Map, Season)
 				end
 			elseif Rated == false then
 				for j=1, #REFDatabase do
-					if REFDatabase[j]["IsRated"] == false then 
+					if REFDatabase[j]["IsRated"] == false then
 						REFlex_FindI(FieldName, j);
 					end
 				end
@@ -320,7 +320,7 @@ function REFlex_Find(FieldName, Rated, TalentSets, Map, Season)
 				end
 			elseif Rated == false then
 				for j=1, #REFDatabase do
-					if REFDatabase[j]["IsRated"] == false and REFDatabase[j]["TalentSet"] == TalentSets and REFDatabase[j]["MapName"] == Map then 
+					if REFDatabase[j]["IsRated"] == false and REFDatabase[j]["TalentSet"] == TalentSets and REFDatabase[j]["MapName"] == Map then
 						REFlex_FindI(FieldName, j);
 					end
 				end
@@ -344,7 +344,7 @@ function REFlex_Find(FieldName, Rated, TalentSets, Map, Season)
 				end
 			elseif Rated == false then
 				for j=1, #REFDatabase do
-					if REFDatabase[j]["IsRated"] == false and REFDatabase[j]["MapName"] == Map then 
+					if REFDatabase[j]["IsRated"] == false and REFDatabase[j]["MapName"] == Map then
 						REFlex_FindI(FieldName, j);
 					end
 				end
@@ -488,7 +488,7 @@ function REFlex_WinLoss(Rated, TalentSets, Map, TimeF, TimeT, Season)
 			elseif Rated == false then
 				for j=1, #REFDatabase do
 					if REFDatabase[j]["IsRated"] == false and REFDatabase[j]["TalentSet"] == TalentSets then
-						REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);	
+						REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);
 					end
 				end
 			else
@@ -505,14 +505,14 @@ function REFlex_WinLoss(Rated, TalentSets, Map, TimeF, TimeT, Season)
 				for j=1, #REFDatabase do
 					if REFDatabase[j]["IsRated"] then
 						if Season == false or (Season == true and REFDatabase[j]["Season"] == RE.CurrentSeason) then
-							REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);	
+							REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);
 						end
 					end
 				end
 			elseif Rated == false then
 				for j=1, #REFDatabase do
 					if REFDatabase[j]["IsRated"] == false then
-						REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);	
+						REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);
 					end
 				end
 			else
@@ -536,7 +536,7 @@ function REFlex_WinLoss(Rated, TalentSets, Map, TimeF, TimeT, Season)
 			elseif Rated == false then
 				for j=1, #REFDatabase do
 					if REFDatabase[j]["IsRated"] == false and REFDatabase[j]["TalentSet"] == TalentSets and REFDatabase[j]["MapName"] == Map then
-						REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);	
+						REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);
 					end
 				end
 			else
@@ -553,14 +553,14 @@ function REFlex_WinLoss(Rated, TalentSets, Map, TimeF, TimeT, Season)
 				for j=1, #REFDatabase do
 					if REFDatabase[j]["IsRated"] and REFDatabase[j]["MapName"] == Map then
 						if Season == false or (Season == true and REFDatabase[j]["Season"] == RE.CurrentSeason) then
-							REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);	
+							REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);
 						end
 					end
 				end
 			elseif Rated == false then
 				for j=1, #REFDatabase do
 					if REFDatabase[j]["IsRated"] == false and REFDatabase[j]["MapName"] == Map then
-						REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);	
+						REFlex_WinLossI(RE.Faction, j, TimeF, TimeT);
 					end
 				end
 			else
@@ -645,7 +645,7 @@ function REFlex_WinLossArena(Bracket, TalentSets, Map, Season)
 				for j=1, #REFDatabaseA do
 					if REFDatabaseA[j]["TalentSet"] == TalentSets and REFDatabaseA[j]["MapName"] == Map then
 						if Season == false or (Season == true and (REFDatabaseA[j]["Season"] == RE.CurrentSeason)) then
-							REFlex_WinLossArenaI(j);	
+							REFlex_WinLossArenaI(j);
 						end
 					end
 				end
@@ -781,7 +781,7 @@ function REFlex_ArenaTeamGrid(IDTo)
 		if REEnemyNamesSpec[1] ~= nil then
 			local RETempBracket = { strsplit("#", table.concat(REEnemyNamesSpec)) };
 			local REEnemyTeamID = RETempBracket[3];
-		
+
 			if REFSettings["OnlyNew"] == false or (REFSettings["OnlyNew"] == true and (RESeason == RE.CurrentSeason)) then
 				if RE.ArenaTeamsSpec[REEnemyTeamID] == nil then
 					RE.ArenaTeamsSpec[REEnemyTeamID] = {};
@@ -816,7 +816,7 @@ end
 function REFlex_Tab7PlayerGrid(TimeF, TimeT)
 	RE.Tab7Matrix = {};
 	local REBGCounter = 0;
-	
+
  	for j=1, #REFDatabase do
 		if REFDatabase[j]["IsRated"] and REFDatabase[j]["RBG" .. RE.Faction .. "Team"] ~= nil and REFDatabase[j]["TimeRaw"] >= TimeF and REFDatabase[j]["TimeRaw"] <= TimeT then
 			for k=1, #REFDatabase[j]["RBG" .. RE.Faction .. "Team"] do
@@ -891,7 +891,7 @@ end
 
 function REFlex_ArenaGetEnemyName(DatabaseID)
 	local TeamE = "";
-	
+
 	if REFDatabaseA[DatabaseID]["PlayerTeam"] == 0 then
 		TeamE = "Gold";
 	else
@@ -1075,8 +1075,8 @@ function REFlex_TableClick(TableName, column)
 	local cols = RE["MainTable" .. TableName].cols;
 	local st = RE["MainTable" .. TableName];
 
-	for i, col in ipairs(st.cols) do 
-		if i ~= column then 
+	for i, col in ipairs(st.cols) do
+		if i ~= column then
 			cols[i].sort = nil;
 		end
 	end
@@ -1084,7 +1084,7 @@ function REFlex_TableClick(TableName, column)
 	local sortorder = "asc";
 	if not cols[column].sort and cols[column].defaultsort then
 		sortorder = cols[column].defaultsort;
-	elseif cols[column].sort and cols[column].sort:lower() == "asc" then 
+	elseif cols[column].sort and cols[column].sort:lower() == "asc" then
 		sortorder = "dsc";
 	end
 	cols[column].sort = sortorder;
@@ -1159,7 +1159,7 @@ function REFlex_Tab_Tab7Filter(self, rowdata)
 				return true;
 			end
 		end
-	
+
 		return false;
 	else
 		return true;
@@ -1168,7 +1168,7 @@ end
 
 function REFlex_Tab_NameFilter(self, rowdata)
 	RE.NameSearch = string.upper(RE.NameSearch);
-	
+
 	if RE.TalentTab ~= nil then
 		if rowdata["cols"][12]["value"] == RE.TalentTab then
 			if RE.BracketDrop ~= nil then
@@ -1207,7 +1207,7 @@ function REFlex_Tab_NameFilter(self, rowdata)
 		else
 			return false;
 		end
-	else	
+	else
 		if RE.BracketDrop ~= nil then
 			if string.find(string.upper(rowdata["cols"][15]["value"]), RE.NameSearch) ~= nil and rowdata["cols"][14]["bracket"] == RE.BracketDrop then
 					return true;
@@ -1259,7 +1259,7 @@ function REFlex_TableRatingMMRArena(PlayerTeam, j)
 	else
 		MMR = "";
 	end
-	
+
 	if PlayerTeam == 0 then
 		Rating = REFDatabaseA[j]["GreenTeamRatingChange"];
 	else
@@ -1290,11 +1290,11 @@ end
 
 function REFlex_TableRBGRatingMMRColor(Rating, j)
 	local Color = "";
-	
+
 	if Rating > 0 then
-		Color = "|CFF00FF00+"; 
+		Color = "|CFF00FF00+";
 	elseif Rating < 0 then
-		Color = "|CFFFF141C"; 
+		Color = "|CFFFF141C";
 	end
 
 	local MMR = REFDatabase[j]["MMRChange"];
@@ -1316,7 +1316,7 @@ end
 
 function REFlex_TableRBGRatingMMR(Faction, j)
 	local RELine = "";
-	
+
 	if REFDatabase[j][Faction .. "MMR"] ~= nil then
 		RELine = " / " .. REFDatabase[j][Faction .. "MMR"];
 	end
@@ -1405,6 +1405,10 @@ function REFlex_TableTeamArena(IsEnemy, j)
 
 		for jj=1, #REEnemyID do
 			local ClassToken = REFDatabaseA[j][TeamE .. "Team"][REEnemyID[jj]]["classToken"];
+			print("Line:"..Line)
+			print("ClassToken:"..ClassToken)
+			print(RE.ClassIconCoords)
+			print(RE.ClassIconCoords[ClassToken])
 			Line = Line .. "  |TInterface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes:25:25:0:0:256:256:" .. RE.ClassIconCoords[ClassToken][1]*256+5 .. ":" .. RE.ClassIconCoords[ClassToken][2]*256-5 .. ":".. RE.ClassIconCoords[ClassToken][3]*256+5 ..":" .. RE.ClassIconCoords[ClassToken][4]*256-5 .. "|t  ";
 		end
 	else
@@ -1457,21 +1461,21 @@ end
 
 function REFlex_TableWinColorArena(j)
 	if REFDatabaseA[j]["Winner"] == 255 then
-		return { 
+		return {
 			["r"] = 1,
 			["g"] = 1,
 			["b"] = 0,
 			["a"] = 1.0,
 		};
 	elseif REFDatabaseA[j]["Winner"] == REFDatabaseA[j]["PlayerTeam"] then
-		return { 
+		return {
 			["r"] = 0,
 			["g"] = 1,
 			["b"] = 0,
 			["a"] = 1.0,
 		};
 	else
-		return { 
+		return {
 			["r"] = 1,
 			["g"] = 0.08,
 			["b"] = 0.11,
@@ -1482,14 +1486,14 @@ end
 
 function REFlex_TableWinColor(Winner)
 	if Winner == FACTION_HORDE then
-		return { 
+		return {
 			["r"] = 1,
 			["g"] = 0.08,
 			["b"] = 0.11,
 			["a"] = 1.0,
 		};
 	else
-		return { 
+		return {
 			["r"] = 0,
 			["g"] = 0.66,
 			["b"] = 1,
@@ -1500,14 +1504,14 @@ end
 
 function REFlex_TableCheckRated(Rated)
 	if Rated then
-		return { 
+		return {
 			["r"] = 1,
 			["g"] = 0,
 			["b"] = 0,
 			["a"] = 1.0,
 		};
 	else
-		return { 
+		return {
 			["r"] = 1,
 			["g"] = 1,
 			["b"] = 1,
@@ -1518,14 +1522,14 @@ end
 
 function REFlex_TableWinError(HordeN, AllyN)
 	if HordeN > 10 or AllyN > 10 then
-		return { 
+		return {
 			["r"] = 0.9,
 			["g"] = 0.9,
 			["b"] = 0,
 			["a"] = 1.0,
 		};
 	else
-		return { 
+		return {
 			["r"] = 1,
 			["g"] = 1,
 			["b"] = 1,
@@ -1538,7 +1542,7 @@ function REFlex_TableTab7Attendance(Attendance)
 	local Red = 1 - (Attendance/10*0.1);
 	local Green = Attendance/10*0.1;
 
-	return { 
+	return {
 		["r"] = Red,
 		["g"] = Green,
 		["b"] = 0,
@@ -1550,11 +1554,11 @@ end
 -- Tooltips Subsection
 function REFlex_ToolTipRatingColorArena(Rating)
 	if Rating > 0 then
-		return "00FF00+"; 
+		return "00FF00+";
 	elseif Rating < 0 then
-		return "FF141C"; 
+		return "FF141C";
 	else
-		return "FFFFFF"; 
+		return "FFFFFF";
 	end
 end
 --
@@ -1631,17 +1635,17 @@ function REFlex_SendStats()
 		player3Rating = GetPersonalRatedInfo(2);
 		player5Rating = GetPersonalRatedInfo(3);
 
-		if player2Rating ~= nil then 
+		if player2Rating ~= nil then
 			REDataString = REDataString .. player2Rating .. ";";
 		else
 			REDataString = REDataString .. "0;";
 		end
-		if player3Rating ~= nil then 
+		if player3Rating ~= nil then
 			REDataString = REDataString .. player3Rating .. ";";
 		else
 			REDataString = REDataString .. "0;";
 		end
-		if player5Rating ~= nil then 
+		if player5Rating ~= nil then
 			REDataString = REDataString .. player5Rating .. ";";
 		else
 			REDataString = REDataString .. "0;";
